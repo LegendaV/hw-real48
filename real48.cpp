@@ -151,7 +151,7 @@ Real48 Real48::operator+() const noexcept
 Real48 Real48::operator-() const noexcept
 {
     Real48 result{*this};
-    result.real48[5] b |= 0x80;
+    result.real48[5] |= 0x80;
     return result;
 }
 
