@@ -21,6 +21,11 @@ Real48::Real48(const float number)
         return;
     }
 
+    if (eFloat >= 0xFF)
+    {
+        throw std::overflow_error("eFloat >= 0xFF");
+    }
+
     const uint64_t e = eFloat + 2;
 
     if (e < 1 || e > 255) {
@@ -53,12 +58,12 @@ Real48::Real48(const double number)
 
     if (eDouble >= 0x7FF)
     {
-        throw std::overflow_error("exponent >= 0x7FF");
+        throw std::overflow_error("eDouble >= 0x7FF");
     }
 
     const uint64_t e = eDouble - 894;
 
-    if (e < 1 || e > 255) {
+    if (e < 1 || e >= 255) {
         throw std::overflow_error("e < 1 || e > 255");
     }
 
