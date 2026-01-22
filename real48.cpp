@@ -51,6 +51,11 @@ Real48::Real48(const double number)
         return;
     }
 
+    if (eDouble >= 0x7FF)
+    {
+        throw std::overflow_error("exponent >= 0x7FF");
+    }
+
     const uint64_t e = eDouble - 894;
 
     if (e < 1 || e > 255) {
@@ -101,11 +106,6 @@ Real48::operator double() const noexcept
     if (e_ == 0)
     {
         return 0;
-    }
-
-    if (e_ >= 0x7FF)
-    {
-        throw std::overflow_error("exponent >= 0x7FF");
     }
 
     uint64_t result = 0;
