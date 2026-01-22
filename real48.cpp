@@ -105,7 +105,7 @@ Real48::operator double() const noexcept
 
     if (exponent >= 0x7FF)
     {
-        throw std::overflow_error();
+        throw std::overflow_error("exponent >= 0x7FF");
     }
 
     uint64_t result = 0;
