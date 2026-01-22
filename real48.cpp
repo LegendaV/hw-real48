@@ -44,7 +44,7 @@ Real48::Real48(const double number)
 {
     uint64_t bits;
 
-    std::memcpy(&bits, &number, sizeof(float));
+    std::memcpy(&bits, &number, sizeof(double));
 
     const uint64_t sDouble = bits >> 63;
     const uint64_t eDouble = bits >> 52 & ((1 << 11) - 1);
@@ -99,7 +99,7 @@ Real48::operator float() const
 
     float resultFloat;
     std::memcpy(&resultFloat, &result, sizeof(float));
-    return result;
+    return resultFloat;
 }
 
 Real48::operator double() const noexcept
@@ -120,7 +120,7 @@ Real48::operator double() const noexcept
 
     double resultDouble;
     std::memcpy(&resultDouble, &result, sizeof(double));
-    return result;
+    return resultDouble;
 }
 
 // assignment operators
