@@ -103,7 +103,7 @@ Real48::operator double() const noexcept
         return 0;
     }
 
-    if (exponent >= 0x7FF)
+    if (e_ >= 0x7FF)
     {
         throw std::overflow_error("exponent >= 0x7FF");
     }
