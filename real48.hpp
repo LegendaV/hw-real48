@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <cstring>
 #include <stdexcept>
 
 namespace math
@@ -56,12 +57,12 @@ public:
     consteval static Real48 max()
     {
         Real48 m{};
-        m.data[0] = 0x7F;
-        m.data[1] = 0xFF;
-        m.data[2] = 0xFF;
-        m.data[3] = 0xFF;
-        m.data[4] = 0xFF;
-        m.data[5] = 0xFF;
+        m.real48[0] = 0x7F;
+        m.real48[1] = 0xFF;
+        m.real48[2] = 0xFF;
+        m.real48[3] = 0xFF;
+        m.real48[4] = 0xFF;
+        m.real48[5] = 0xFF;
         return t;
     }
 

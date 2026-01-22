@@ -1,5 +1,6 @@
 ﻿#include <cstdint>
 #include <stdexcept>
+#include <cstring>
 #include "real48.hpp"
 
 namespace math
