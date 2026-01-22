@@ -63,7 +63,7 @@ public:
         m.real48[3] = 0xFF;
         m.real48[4] = 0xFF;
         m.real48[5] = 0xFF;
-        return t;
+        return m;
     }
 
     consteval static Real48 epsilon()

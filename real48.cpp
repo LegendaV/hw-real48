@@ -104,8 +104,8 @@ Real48::operator double() const noexcept
     }
 
     uint64_t result = 0;
-    result |= (s_ << 63);
-    result |= ((e_ + 894) << 52);
+    result |= (uint64_t(s_) << 63);
+    result |= ((uint64_t(e_) + 894) << 52);
     result |= (f_ >> 13);
 
     double resultDouble;
@@ -148,7 +148,12 @@ Real48 Real48::operator+() const noexcept
     return *this;
 }
 
-Real48 Real48::operator-() const noexcept;
+Real48 Real48::operator-() const noexcept
+{
+    Real48 result{*this};
+    result.data[5] b |= 0x80;
+    return result;
+}
 
 Real48 Real48::operator+(const Real48& o) const
 {
@@ -185,7 +190,7 @@ bool Real48::operator<(const Real48& o) const noexcept
     return (static_cast<double>(*this) < static_cast<double>(o));
 }
 
-Class Real48::Classify() const noexcept
+Real48::Class Real48::Classify() const noexcept
 {
     if (e() == 0)
     {
