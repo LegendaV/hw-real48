@@ -103,6 +103,11 @@ Real48::operator double() const noexcept
         return 0;
     }
 
+    if (exponent >= 0x7FF)
+    {
+        throw std::overflow_error();
+    }
+
     uint64_t result = 0;
     result |= (uint64_t(s_) << 63);
     result |= ((uint64_t(e_) + 894) << 52);
