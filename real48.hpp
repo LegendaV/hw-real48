@@ -1,3 +1,7 @@
+#pragma once
+#include <cstdint>
+#include <stdexcept>
+
 namespace math
 {
 
@@ -5,7 +9,7 @@ class Real48
 {
 public:
     // constructors
-    constexpr Real48(); // TODO: add definition
+    constexpr Real48(): real48{} {};
     Real48(const float number);
     Real48(const double number);
     constexpr Real48(const Real48& o) = default;
@@ -42,12 +46,40 @@ public:
     Class Classify() const noexcept;
 
     // limits
-    consteval static Real48 min();     // TODO: add definition
-    consteval static Real48 max();     // TODO: add definition
-    consteval static Real48 epsilon(); // TODO: add definition
+    consteval static Real48 min()
+    {
+        Real48 m{};
+        m.real48[5] = 1;
+        return m;
+    }
+
+    consteval static Real48 max()
+    {
+        Real48 m{};
+        m.data[0] = 0x7F;
+        m.data[1] = 0xFF;
+        m.data[2] = 0xFF;
+        m.data[3] = 0xFF;
+        m.data[4] = 0xFF;
+        m.data[5] = 0xFF;
+        return t;
+    }
+
+    consteval static Real48 epsilon()
+    {
+        Real48 eps;
+        eps.real48[5] = 90;
+        return eps;
+    }
 
 private:
-    // TODO: add members
+    unsigned char real48[6];
+        
+    bool s() const;
+
+    uint8_t e() const;
+
+    uint64_t f() const;
 };
 
 } // namespace math
