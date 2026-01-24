@@ -23,14 +23,14 @@ Real48::Real48(const float number)
         throw std::overflow_error("float inf/nan");
     }
 
-    const uint64_t e = eFloat + 2;
-    if (e < 1 || e > 255) {
+    const uint64_t e_ = eFloat + 2;
+    if (e_ > 255) {
         throw std::overflow_error("float exponent out of range");
     }
 
-    const uint64_t f = (uint64_t(fFloat) << 16) & ((1ULL << 39) - 1);
+    const uint64_t f_ = (uint64_t(fFloat) << 16) & ((1ULL << 39) - 1);
 
-    const uint64_t v48 = (sFloat << 47) | (f << 8) | (e & 0xFFULL);
+    const uint64_t v48 = (sFloat << 47) | (f_ << 8) | (e_ & 0xFFULL);
 
     real48[0] = (v48 >> 40) & 0xFF;
     real48[1] = (v48 >> 32) & 0xFF;
@@ -58,15 +58,15 @@ Real48::Real48(const double number)
         throw std::overflow_error("double inf/nan");
     }
 
-    const uint64_t e = eDouble - 894;
+    const uint64_t e_ = eDouble - 894;
 
-    if (e < 1 || e > 255) {
+    if (e_ < 1 || e_ > 255) {
         throw std::overflow_error("double exponent out of range");
     }
 
-    const uint64_t f = (fDouble >> 13) & ((1ULL << 39) - 1ULL);
+    const uint64_t f_ = (fDouble >> 13) & ((1ULL << 39) - 1ULL);
 
-    const uint64_t v48 = (sDouble << 47) | (f << 8) | (e & 0xFFULL);
+    const uint64_t v48 = (sDouble << 47) | (f_ << 8) | (e_ & 0xFFULL);
 
     real48[0] = (v48 >> 40) & 0xFF;
     real48[1] = (v48 >> 32) & 0xFF;
@@ -222,10 +222,10 @@ bool Real48::s() const
 
     uint64_t Real48::f() const
     {
-        uint64_t f = 0;
+        uint64_t f_ = 0;
         for (int i = 0; i < 6; ++i)
-            f = (f << 8) | real48[i];
+            f_ = (f_ << 8) | real48[i];
 
-        return (f >> 8) & ((1ULL << 39) - 1);
+        return (f_ >> 8) & ((1ULL << 39) - 1);
     }
 } // namespace math

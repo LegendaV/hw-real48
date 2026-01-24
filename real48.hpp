@@ -11,8 +11,8 @@ class Real48
 public:
     // constructors
     constexpr Real48(): real48{} {};
-    Real48(const float number);
-    Real48(const double number);
+    explicit Real48(const float number);
+    explicit Real48(const double number);
     constexpr Real48(const Real48& o) = default;
 
     // conversion operators
